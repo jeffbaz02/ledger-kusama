@@ -22,11 +22,13 @@ const ed25519 = require("ed25519-supercop");
 const Resolve = require("path").resolve;
 
 const APP_SEED = "equip will roof matter pink blind book anxiety banner elbow sun young"
+let enableX11 = null;
+
 var simOptions = {
     logging: true,
     start_delay: 3000,
-    custom: `-s "${APP_SEED}"`
-    , X11: true
+    custom: `-s "${APP_SEED}"`,
+    X11: enableX11 !== null ? enableX11 : !!process.env["$DISPLAY"]
 };
 
 let models = [
