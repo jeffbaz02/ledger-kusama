@@ -18,7 +18,6 @@ import jest, {expect} from "jest";
 import Zemu from "@zondax/zemu";
 
 const {newKusamaApp} = require("@zondax/ledger-polkadot");
-const ed25519 = require("ed25519-supercop");
 const Resolve = require("path").resolve;
 
 const APP_SEED = "equip will roof matter pink blind book anxiety banner elbow sun young"
@@ -33,7 +32,7 @@ var simOptions = {
 
 let models = [
     ['S', {model: 'nanos', prefix: 'S', path: Resolve("../app/output/app_s.elf")}],
-    ['X', {model: 'nanox', prefix: 'X', path: Resolve("../app/output/app_x.elf")}]
+//    ['X', {model: 'nanox', prefix: 'X', path: Resolve("../app/output/app_x.elf")}]
 ]
 
 jest.setTimeout(60000)
