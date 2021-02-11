@@ -106,6 +106,7 @@ zxerr_t crypto_sign_ed25519(uint8_t *signature, uint16_t signatureMaxlen,
     int signatureLength = 0;
     unsigned int info = 0;
 
+    cx_ecfp_private_key_t cx_privateKey;
     BEGIN_TRY
     {
         TRY
@@ -121,7 +122,6 @@ zxerr_t crypto_sign_ed25519(uint8_t *signature, uint16_t signatureMaxlen,
                     NULL,
                     0);
 
-            cx_ecfp_private_key_t cx_privateKey;
             cx_ecfp_init_private_key(CX_CURVE_Ed25519, privateKeyData, SCALAR_LEN_ED25519, &cx_privateKey);
 
             // Sign
@@ -136,11 +136,10 @@ zxerr_t crypto_sign_ed25519(uint8_t *signature, uint16_t signatureMaxlen,
                                             signature + 1,
                                             signatureMaxlen - 1,
                                             &info);
-            MEMZERO(&cx_privateKey, sizeof(cx_privateKey));
-
         }
         CATCH_ALL
         {
+            MEMZERO(&cx_privateKey, sizeof(cx_privateKey));
             *signatureLen = 0;
             CLOSE_TRY;
             return zxerr_unknown;
